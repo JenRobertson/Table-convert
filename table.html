@@ -1,0 +1,894 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Word table to HTML</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="icon" 
+		type="image/png" 
+		href="images/favicon2.ico">
+	</head>
+	<body>
+		<div id="container">
+			<nav>
+				<a href="index.html">Online Encoder</a>
+				<a href="macro.html">Word Macro Encoder </a>
+				<a class="current" href="table.html">Word table to HTML</a>
+			</nav>
+
+			<h1 class="pacifico">Word table to <span class="anagramregular">HTML</span></h1>
+
+			<div class="float_left">
+				<input title="Surround italic text from the word document with <em> tags." type="checkbox" id="setting1" class="">
+				<label for="setting1">Add <span class="courier">&#60;em&#62;</span> for italic text</label><br>			
+				<input type="checkbox" id="setting2">
+				<label for="setting2">Add <span class="courier">&#60;strong&#62;</span> for bold text</label><br>
+				<input type="checkbox" id="setting7" checked>
+				<label for="setting7">Add <span class="courier">colspan</span> and <span class="courier">rowspan</span></label><br>
+				<input type="radio" name="check" id="setting_br1" checked>
+				<label for="setting_br1">Use <span class="courier">&#60;br&#62;</span></label>
+				<input type="radio" name="check" id="setting_br2">
+				<label for="setting_br2">Use <span class="courier">&#60;br/&#62;</span></label>
+				<input type="radio" name="check" id="setting_br3">
+				<label for="setting_br3">Neither
+        <input type="checkbox" id="setting_html" class="">
+        <label for="setting_html"><span class="courier">HTML</span> mode</label><br>     
+			</div>
+
+			<div class="float_right">
+				<input type="checkbox" id="setting5" checked>
+				<label for="setting5">Encode characters<br>
+				<input type="checkbox" id="setting3">
+				<label for="setting3">Add <span class="courier">&#60;p&#62;</span> inside cells<br>
+				<!-- <input type="checkbox" id="setting4">Add <span class="courier">&#60;span&#62;</span> inside cells?<br> -->
+				<input type="checkbox" id="setting8" checked>
+				<label for="setting8">Fill empty cells with <span class="courier">&#38;nbsp;</span><br>
+
+				<span>More settings available after tables generated</span>
+
+			</div>
+
+
+			<h2 class="pacifico"> Paste table here: </h2>
+			<div id="inputbox" class="box table_bg" contenteditable="true" spellcheck="false"></div>
+
+
+			<a class="large_button" href="#preview"><button type="button" class="anagramregular large_button" id="submit" title="Warning: This will overwrite existing generated tables">Generate HTML</button></a>
+			<button id="clear" type="button">Clear</button>
+			</div>
+		
+		<div class="grey">
+<h2 class="pacifico">Instructions</h2>
+</div>
+		<div id="footer">
+			<button id = "demo" title="Insert an example word document into the input box.">Demo</button>
+			<p>This tool extracts and converts word tables into clean HTML code.</p>					
+
+				<ol>
+					<li>Copy part or all of a word document containing table(s) to the clipboard.</li>
+					<li>Paste it into the white box and select the settings you want. For example, the 'Add strong' setting will replace bold text from the word document with &#60;strong&#62; tags. If the cells seem very misaligned, disabling 'Add colspan and rowspan' can sometimes help.</li>
+					<li>Click 'Generate HTML'. The tool will find and extract all tables from the document and output them separately below.</li>
+					<li>Further customisation can be made to each table individually with the tools below it. Classes can be applied to rows and columns, which are visually represented on the table using colours. If a cell has multiple classes, stripes or a gradient will be used, dependant on user preference. More classes can be added using the '+' button.</li>
+					<li>Once happy with the table markup, press 'Select for copying' and copy the html code for use in your project.</li>
+				</ol>
+
+					<p>A selection of tables to test with can be found here: <strong>G:\WebDevelopment\people\jenny\entities\sample_tables</strong></p>
+
+  
+        <p><strong>New: HTML Mode</strong><br>
+        If you check 'HTML Mode' the program will accept HTML code instead of a word document as input. You can then use the class tools to add classes to the HTML table. <br>
+          Please note: All existing classes in the pasted in HTML code will be removed.</p>
+
+
+				<p>By Jenny Robertson (jennifer.robertson@addison-group.net)</p>
+			<!-- 
+			<strong>To do </strong>
+				<ul>
+					<li>message about how many classes can be used</li>	
+					<li>make instructions visual</li>
+					<li>tidy and simplify code?</li>
+					<li>Fix duplicate class names inside one cell</li>
+				</ul> -->
+
+		</div>
+		
+		<div id="preview"><h2 class="pacifico">Preview of your table:</h2><a href="#container" id="back_to_top">Back to top</a>
+			<div id="preview_div">
+			</div>
+		</div>
+
+		<div id="gradient"></div>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="table.js"></script>
+<div id = "demo_div"  class="hidden">
+<p class="MsoNormal">Text</p>
+
+<table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" align="left" style="border: none; margin-left: 6.75pt; margin-right: 6.75pt;">
+ <tbody><tr>
+  <td width="150" colspan="2" valign="top" style="width: 112.7pt; border-color: windowtext; border-width: 1pt; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><b>Bold text</b> <i>Italic text</i></p>
+  </td>
+  <td width="301" colspan="2" valign="top" style="width: 225.4pt; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; border-left-style: none; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;">Symbols <span style="font-family:&quot;Segoe UI Symbol&quot;,sans-serif">☺ $ £</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="150" valign="top" style="width: 112.7pt; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; border-top-style: none; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;">Text</p>
+  </td>
+  <td width="150" valign="top" style="width: 112.7pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="background:yellow;mso-highlight:yellow">Text</span></p>
+  </td>
+  <td width="150" valign="top" style="width: 112.7pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="background:yellow;mso-highlight:yellow">Text</span></p>
+  </td>
+  <td width="150" valign="top" style="width: 112.7pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;">4 </p>
+  </td>
+ </tr>
+ <tr>
+  <td width="150" valign="top" style="width: 112.7pt; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; border-top-style: none; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;">Numbers</p>
+  </td>
+  <td width="150" valign="top" style="width: 112.7pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;">Text</p>
+  </td>
+  <td width="150" valign="top" style="width: 112.7pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;">£300</p>
+  </td>
+  <td width="150" valign="top" style="width: 112.7pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;">$800<span style="font-family:&quot;Segoe UI Symbol&quot;,sans-serif"></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="150" valign="top" style="width: 112.7pt; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; border-top-style: none; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;">&lt; 70</p>
+  </td>
+  <td width="150" valign="top" style="width: 112.7pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;">&nbsp;</p>
+  </td>
+  <td width="150" valign="top" style="width: 112.7pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;">&nbsp;</p>
+  </td>
+  <td width="150" valign="top" style="width: 112.7pt; border-top-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;">&nbsp;</p>
+  </td>
+ </tr>
+</tbody></table>
+
+<p class="MsoNormal">&nbsp;</p>
+
+<p class="MsoNormal">&nbsp;</p>
+
+<p class="MsoNormal">Text</p>
+
+<p class="MsoNormal">&nbsp;</p>
+
+<p class="MsoFooter" style="margin-bottom:12.0pt"><b><span style="font-size:11.0pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Calibri&quot;,sans-serif;mso-ascii-theme-font:
+minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:Arial;
+color:windowtext">26 November 2014</span></b></p>
+
+<p class="MsoFooter"><b><span style="font-size:11.0pt;mso-bidi-font-size:12.0pt;
+font-family:&quot;Calibri&quot;,sans-serif;mso-ascii-theme-font:minor-latin;mso-hansi-theme-font:
+minor-latin;mso-bidi-font-family:Arial;color:windowtext">Interim Management
+Statement for the 3 months to 31 October 2014<br>
+<!--[if !supportLineBreakNewLine]--><br>
+<!--[endif]--></span></b><b><span style="font-size:8.0pt;font-family:&quot;Calibri&quot;,sans-serif;
+mso-ascii-theme-font:minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:
+Arial;color:windowtext"></span></b></p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="643" style="width: 482.2pt; margin-left: 5.4pt;">
+ <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;height:10.85pt">
+  <td width="104" valign="top" style="width: 77.95pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 10.85pt;">
+  <p class="MsoNormal" style="margin-left:-5.4pt;text-indent:5.4pt"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">£m</span></b></p>
+  <p class="MsoNormal"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;&nbsp;&nbsp;&nbsp; </span></b></p>
+  </td>
+  <td width="212" valign="top" style="width: 158.75pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 10.85pt;">
+  <p class="MsoNormal" align="right" style="text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="60" valign="top" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 10.85pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial">Q1 2015</span></b></p>
+  </td>
+  <td width="60" valign="top" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 10.85pt;">
+  <p class="MsoNormal" align="right" style="text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial">Q1 2014</span></b></p>
+  </td>
+  <td width="69" valign="top" style="width: 51.6pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 10.85pt;">
+  <p class="MsoNormal" align="right" style="text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial">Change</span></b></p>
+  </td>
+  <td width="69" valign="top" style="width: 51.6pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 10.85pt;">
+  <p class="MsoNormal" align="right" style="text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial">Change </span></b></p>
+  <p class="MsoNormal" align="right" style="text-align:right"><b><span style="font-size:8.0pt;line-height:107%;mso-bidi-font-family:
+  Arial">(at constant exchange rates)</span></b><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial"></span></b></p>
+  </td>
+  <td width="69" valign="top" style="width: 51.6pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 10.85pt;">
+  <p class="MsoNormal" align="right" style="text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial">Like-for-like change<sup>(3)</sup> </span></b></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:1;height:18.65pt">
+  <td width="104" style="width: 77.95pt; border: none; padding: 0cm 5.4pt; height: 18.65pt;">
+  <p class="MsoNormal"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">Revenue </span></b></p>
+  </td>
+  <td width="212" style="width: 158.75pt; border: none; padding: 0cm 5.4pt; height: 18.65pt;">
+  <p class="MsoNormal" style="margin-right:1.7pt"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial">Ongoing businesses <sup>(1)</sup></span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border: none; padding: 0cm 5.4pt; height: 18.65pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">3,506</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border: none; padding: 0cm 5.4pt; height: 18.65pt;">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">3,332</span></p>
+  </td>
+  <td width="69" style="width: 51.6pt; border: none; padding: 0cm 5.4pt; height: 18.65pt;">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%">+5.2%</span></p>
+  </td>
+  <td width="69" style="width: 51.6pt; border: none; padding: 0cm 5.4pt; height: 18.65pt;">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">+9.8%</span></p>
+  </td>
+  <td width="69" style="width: 51.6pt; border: none; padding: 0cm 5.4pt; height: 18.65pt;">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">+6.6%</span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:2;height:18.65pt">
+  <td width="104" style="width:77.95pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.65pt">
+  <p class="MsoNormal"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="212" style="width:158.75pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.65pt">
+  <p class="MsoNormal" style="margin-right:1.7pt"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial">Closed, disposed of or held for sale</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 18.65pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">46</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 18.65pt;">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">200</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.65pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%">&nbsp;</span></p>
+  </td>
+  <td width="69" valign="top" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:18.65pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.65pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:3;height:18.9pt">
+  <td width="104" style="width:77.95pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="212" valign="top" style="width:158.75pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border: none; padding: 0cm 5.4pt; height: 18.9pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">3,552</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border: none; padding: 0cm 5.4pt; height: 18.9pt;">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">3,532</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%">&nbsp;</span></p>
+  </td>
+  <td width="69" valign="top" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:4;height:3.5pt">
+  <td width="104" style="width:77.95pt;padding:0cm 5.4pt 0cm 5.4pt;height:3.5pt">
+  <p class="MsoNormal"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="212" valign="top" style="width:158.75pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:3.5pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="60" style="width:45.35pt;background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt;
+  height:3.5pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:3.5pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:3.5pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%">&nbsp;</span></p>
+  </td>
+  <td width="69" valign="top" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:3.5pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:3.5pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:5;height:18.9pt">
+  <td width="104" style="width:77.95pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">Trading profit<a name="OLE_LINK10"> <sup>(</sup></a><sup>2)
+  </sup></span></b></p>
+  </td>
+  <td width="212" style="width:158.75pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" style="margin-right:1.7pt"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial">Ongoing businesses <sup>(1)</sup></span></b></p>
+  </td>
+  <td width="60" style="width:45.35pt;background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt;
+  height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">235</span></b></p>
+  </td>
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">216</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%">+8.8%</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">+13.5%</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:6;height:18.9pt">
+  <td width="104" style="width:77.95pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="212" style="width:158.75pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" style="margin-right:1.7pt"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial">Closed, disposed of or held for sale</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 18.9pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">(2)</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 18.9pt;">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">-</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%">&nbsp;</span></p>
+  </td>
+  <td width="69" valign="top" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:7;height:18.9pt">
+  <td width="104" style="width:77.95pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="212" valign="top" style="width:158.75pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border: none; padding: 0cm 5.4pt; height: 18.9pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">233</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border: none; padding: 0cm 5.4pt; height: 18.9pt;">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">216</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%">&nbsp;</span></p>
+  </td>
+  <td width="69" valign="top" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.95pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:8;height:11.65pt">
+  <td width="104" style="width:77.95pt;padding:0cm 5.4pt 0cm 5.4pt;height:11.65pt">
+  <p class="MsoNormal"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="212" valign="top" style="width:158.75pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:11.65pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="60" style="width:45.35pt;background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt;
+  height:11.65pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:11.65pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:11.65pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%">&nbsp;</span></p>
+  </td>
+  <td width="69" valign="top" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:11.65pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="69" valign="top" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:11.65pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:9;mso-yfti-lastrow:yes;height:18.9pt">
+  <td width="316" colspan="2" style="width:236.7pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:18.9pt">
+  <p class="MsoNormal" style="margin-right:1.7pt"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+  107%;mso-bidi-font-family:Arial">Net debt</span></b></p>
+  </td>
+  <td width="60" style="width:45.35pt;background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt;
+  height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;line-height:107%;mso-bidi-font-family:Arial">858</span></b></p>
+  </td>
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="margin-right:1.7pt;text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">469</span></p>
+  </td>
+  <td width="69" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.9pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%">&nbsp;</span></p>
+  </td>
+  <td width="69" valign="top" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:18.9pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="69" valign="top" style="width:51.6pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:18.9pt">
+  <p class="MsoNormal" align="right" style="text-align:right"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+  mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+ </tr>
+</tbody></table>
+
+<p class="MsoNormal">&nbsp;</p>
+
+<p class="MsoNormal"><i>Regional analysis</i></p>
+
+<p class="MsoNormal"><span style="font-size:8.0pt;line-height:107%;mso-bidi-font-family:
+Arial">&nbsp;</span></p>
+
+<table class="MsoTableGrid" border="0" cellspacing="0" cellpadding="0" width="642" style="margin-left: 5.4pt; border: none;">
+ <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;height:38.85pt">
+  <td width="204" valign="top" style="width: 153.05pt; border-top-color: windowtext; border-top-width: 1pt; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-style: none; padding: 0cm 5.4pt; height: 38.85pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><b><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">£ million</span></b></p>
+  </td>
+  <td width="64" valign="top" style="width: 48.2pt; border-top-color: windowtext; border-top-width: 1pt; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-style: none; padding: 0cm 5.4pt; height: 38.85pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Revenue</span></b></p>
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;Q1 2015</span></b></p>
+  </td>
+  <td width="64" valign="top" style="width: 48.2pt; border-top-color: windowtext; border-top-width: 1pt; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-style: none; padding: 0cm 5.4pt; height: 38.85pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Revenue</span></b></p>
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Q1
+  2014</span></b></p>
+  </td>
+  <td width="60" valign="top" style="width: 45.35pt; border-top-color: windowtext; border-top-width: 1pt; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-style: none; padding: 0cm 5.4pt; height: 38.85pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Change</span></b></p>
+  </td>
+  <td width="68" valign="top" style="width: 51pt; border-top-color: windowtext; border-top-width: 1pt; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-style: none; padding: 0cm 5.4pt; height: 38.85pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Change
+  </span></b></p>
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:8.0pt;mso-bidi-font-family:Arial">(at constant exchange
+  rates)</span></b><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial"></span></b></p>
+  </td>
+  <td width="60" valign="top" style="width: 45.35pt; border-top-color: windowtext; border-top-width: 1pt; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-style: none; padding: 0cm 5.4pt; height: 38.85pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Like-for-like</span></b></p>
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">change
+  </span></b></p>
+  </td>
+  <td width="60" valign="top" style="width: 45.35pt; border-top-color: windowtext; border-top-width: 1pt; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-style: none; padding: 0cm 5.4pt; height: 38.85pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Trading
+  profit</span></b></p>
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Q1
+  2015</span></b></p>
+  </td>
+  <td width="60" valign="top" style="width: 45.35pt; border-top-color: windowtext; border-top-width: 1pt; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-style: none; padding: 0cm 5.4pt; height: 38.85pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Trading
+  profit</span></b></p>
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Q1
+  2014</span></b></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:1;height:17.95pt">
+  <td width="204" style="width:153.05pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><a name="_Hlk268176119"><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">USA</span></a></p>
+  </td>
+  
+  <td width="64" style="width:48.2pt;background:#D9D9D9;mso-background-themecolor:
+  background1;mso-background-themeshade:217;padding:0cm 5.4pt 0cm 5.4pt;
+  height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">2,015</span></b></p>
+  </td>
+  
+  <td width="64" style="width:48.2pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">1,821</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+10.7%</span></p>
+  </td>
+  
+  <td width="68" style="width:51.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+14.3%</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+12.4%</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt;
+  height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">174</span></b></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">142</span></p>
+  </td>
+  
+ </tr>
+ <tr style="mso-yfti-irow:2;height:17.95pt">
+  <td width="204" style="width:153.05pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Canada</span></p>
+  </td>
+  
+  <td width="64" style="width:48.2pt;background:#D9D9D9;mso-background-themecolor:
+  background1;mso-background-themeshade:217;padding:0cm 5.4pt 0cm 5.4pt;
+  height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">221</span></b></p>
+  </td>
+  
+  <td width="64" style="width:48.2pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">237</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">(6.8%)</span></p>
+  </td>
+  
+  <td width="68" style="width:51.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+2.2%</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+1.7%</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt;
+  height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">16</span></b></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">17</span></p>
+  </td>
+  
+ </tr>
+ <tr style="mso-yfti-irow:3;height:17.95pt">
+  <td width="204" style="width:153.05pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">UK</span></p>
+  </td>
+  
+  <td width="64" style="width:48.2pt;background:#D9D9D9;mso-background-themecolor:
+  background1;mso-background-themeshade:217;padding:0cm 5.4pt 0cm 5.4pt;
+  height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">504</span></b></p>
+  </td>
+  
+  <td width="64" style="width:48.2pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">483</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+4.3%</span></p>
+  </td>
+  
+  <td width="68" style="width:51.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">n/a</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+0.5%</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt;
+  height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">24</span></b></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">25</span></p>
+  </td>
+  
+ </tr>
+ <tr style="mso-yfti-irow:4;height:17.95pt">
+  <td width="204" style="width:153.05pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Nordic</span></p>
+  </td>
+  
+  <td width="64" style="width:48.2pt;background:#D9D9D9;mso-background-themecolor:
+  background1;mso-background-themeshade:217;padding:0cm 5.4pt 0cm 5.4pt;
+  height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">541</span></b></p>
+  </td>
+  
+  <td width="64" style="width:48.2pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">528</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+2.5%</span></p>
+  </td>
+  
+  <td width="68" style="width:51.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+11.5%</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+1.9%</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt;
+  height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">26</span></b></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">29</span></p>
+  </td>
+  
+ </tr>
+ <tr style="mso-yfti-irow:5;height:17.95pt">
+  <td width="204" style="width:153.05pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Central Europe and
+  France</span></p>
+  </td>
+  
+  <td width="64" style="width:48.2pt;background:#D9D9D9;mso-background-themecolor:
+  background1;mso-background-themeshade:217;padding:0cm 5.4pt 0cm 5.4pt;
+  height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">225</span></b></p>
+  </td>
+  
+  <td width="64" style="width:48.2pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">263</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">(14.4%)
+  </span></p>
+  </td>
+  
+  <td width="68" style="width:51.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">(8.4%)</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">(9.3%)</span></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt;
+  height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">6</span></b></p>
+  </td>
+  
+  <td width="60" style="width:45.35pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.95pt">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">13</span></p>
+  </td>
+  
+ </tr>
+ <tr style="mso-yfti-irow:6;height:17.95pt">
+  <td width="204" style="width: 153.05pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">Central and other costs</span></p>
+  </td>
+  
+  <td width="64" style="width: 48.2pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+  </td>
+  
+  <td width="64" style="width: 48.2pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  
+  <td width="68" style="width: 51pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;mso-bidi-font-family:Arial">(11)</span></b></p>
+  </td>
+  
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">(10)</span></p>
+  </td>
+  
+ </tr>
+ <tr style="mso-yfti-irow:7;height:17.95pt">
+  <td width="204" style="width: 153.05pt; border: none; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:
+  Arial">Ongoing businesses</span></p>
+  </td>
+  <td width="64" style="width: 48.2pt; border: none; padding: 0cm 5.4pt; height: 17.95pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">3,506</span></b></p>
+  </td>
+  <td width="64" style="width: 48.2pt; border: none; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">3,332</span></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border: none; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+5.2%</span></p>
+  </td>
+  <td width="68" style="width: 51pt; border: none; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+9.8%</span></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border: none; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">+6.6%</span></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border: none; padding: 0cm 5.4pt; height: 17.95pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">235</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border: none; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">216</span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:8;height:17.95pt">
+  <td width="204" style="width: 153.05pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:
+  Arial">Closed, disposed of or held for sale</span></p>
+  </td>
+  <td width="64" style="width: 48.2pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">46</span></b></p>
+  </td>
+  <td width="64" style="width: 48.2pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">200</span></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="68" valign="top" style="width: 51pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">(2)</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">-</span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:9;mso-yfti-lastrow:yes;height:17.95pt">
+  <td width="204" style="width: 153.05pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:
+  Arial">Group</span></p>
+  </td>
+  <td width="64" style="width: 48.2pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">3,552</span></b></p>
+  </td>
+  <td width="64" style="width: 48.2pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">3,532</span></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="68" valign="top" style="width: 51pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">&nbsp;</span></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt; background: rgb(217, 217, 217);">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><b><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">233</span></b></p>
+  </td>
+  <td width="60" style="width: 45.35pt; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-color: windowtext; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 17.95pt;">
+  <p class="MsoNormal" align="right" style="margin-bottom: 0.0001pt; text-align: right;"><span style="font-size:10.0pt;
+  mso-bidi-font-size:11.0pt;mso-bidi-font-family:Arial">216</span></p>
+  </td>
+ </tr>
+</tbody></table>
+
+<p class="MsoNormal">&nbsp;</p>
+
+<p class="MsoNormal">&nbsp;</p>
+
+<p class="MsoNormal">&nbsp;</p>
+
+<p class="MsoNormal">&nbsp;</p>
+</div>
+	</body>
+</html>

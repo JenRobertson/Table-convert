@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HTML Character Encoder</title>
+<!--#include file="../../template/components/qry_inpage_xml.asp"-->
+<!--uses char codes from http://www.danshort.com/HTMLentities/ now so all characters can be included. We can leave these as they are in the other example and remove the extra characters lower down-->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="icon" 
+      type="image/png" 
+      href="images/favicon.ico">
+</head>
+<body>
+<div id="container">
+	<nav>
+            <a href="index.html">Online Encoder</a>
+            <a class="current" href="macro.html">Word Macro Encoder </a>
+            <a href="table.html">Word table to HTML</a>
+        </nav>
+<img id="img1" src="images/1.jpg" class="mouse-hovered">
+<img id="img2" src="images/2.jpg" class="mouse-hovered">
+<img id="img3" src="images/3.jpg" class="mouse-hovered">
+<img id="img4" src="images/4.jpg" class="mouse-hovered">
+<img id="img5" src="images/5.jpg" class="mouse-hovered">
+
+<h1 class="pacifico">Word Macro</h1>
+<p class="centre">Paste the text below into a new word macro to use.</p>
+<button id="highlight">Highlight text for copying</button><br/>
+<textarea rows="20" cols="80" type="text" readonly id="bigger">
+Sub Convert_to_HTML_Character_Entities()
+
+&#39;First encode the ampersand
+    Selection.Find.Execute Replace:=wdReplaceAll
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = &#34;&#38;&#34;
+        .Replacement.Text = &#34;&#38;amp;&#34;
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+
+&#39;Encode all letters
+    Dim textArray As Variant
+    Dim encodeArray As Variant
+    Dim n
+    n = 0
+    
+    &#39;array containing ascii text
+    textArray = Array(&#34;&#192;&#34;, &#34;&#200;&#34;, &#34;&#204;&#34;, &#34;&#210;&#34;, &#34;&#217;&#34;, &#34;&#224;&#34;, &#34;&#232;&#34;, &#34;&#236;&#34;, &#34;&#242;&#34;, &#34;&#249;&#34;, &#34;&#193;&#34;, &#34;&#201;&#34;, &#34;&#205;&#34;, &#34;&#211;&#34;, &#34;&#218;&#34;, &#34;&#221;&#34;, &#34;&#225;&#34;, &#34;&#233;&#34;, &#34;&#237;&#34;, &#34;&#243;&#34;, &#34;&#250;&#34;, &#34;&#253;&#34;, &#34;&#194;&#34;, &#34;&#202;&#34;, &#34;&#206;&#34;, &#34;&#212;&#34;, &#34;&#219;&#34;, &#34;&#226;&#34;, &#34;&#234;&#34;, &#34;&#238;&#34;, &#34;&#244;&#34;, &#34;&#251;&#34;, &#34;&#195;&#34;, &#34;&#209;&#34;, &#34;&#213;&#34;, &#34;&#227;&#34;, &#34;&#241;&#34;, &#34;&#245;&#34;, &#34;&#196;&#34;, &#34;&#203;&#34;, &#34;&#207;&#34;, &#34;&#214;&#34;, &#34;&#220;&#34;, &#34;&#376;&#34;, &#34;&#228;&#34;, &#34;&#235;&#34;, &#34;&#239;&#34;, &#34;&#246;&#34;, &#34;&#252;&#34;, &#34;&#255;&#34;)
+    &#39;array containing html entities
+    encodeArray = Array(&#34;&#38;#192;&#34;, &#34;&#38;#200;&#34;, &#34;&#38;#204;&#34;, &#34;&#38;#210;&#34;, &#34;&#38;#217;&#34;, &#34;&#38;#224;&#34;, &#34;&#38;#232;&#34;, &#34;&#38;#236;&#34;, &#34;&#38;#242;&#34;, &#34;&#38;#249;&#34;, &#34;&#38;#193;&#34;, &#34;&#38;#201;&#34;, &#34;&#38;#205;&#34;, &#34;&#38;#211;&#34;, &#34;&#38;#218;&#34;, &#34;&#38;#221;&#34;, &#34;&#38;#225;&#34;, &#34;&#38;#233;&#34;, &#34;&#38;#237;&#34;, &#34;&#38;#243;&#34;, &#34;&#38;#250;&#34;, &#34;&#38;#253;&#34;, &#34;&#38;#194;&#34;, &#34;&#38;#202;&#34;, &#34;&#38;#206;&#34;, &#34;&#38;#212;&#34;, &#34;&#38;#219;&#34;, &#34;&#38;#226;&#34;, &#34;&#38;#234;&#34;, &#34;&#38;#238;&#34;, &#34;&#38;#244;&#34;, &#34;&#38;#251;&#34;, &#34;&#38;#195;&#34;, &#34;&#38;#209;&#34;, &#34;&#38;#213;&#34;, &#34;&#38;#227;&#34;, &#34;&#38;#241;&#34;, &#34;&#38;#245;&#34;, &#34;&#38;#196;&#34;, &#34;&#38;#203;&#34;, &#34;&#38;#207;&#34;, &#34;&#38;#214;&#34;, &#34;&#38;#220;&#34;, &#34;&#38;#376;&#34;, &#34;&#38;#228;&#34;, &#34;&#38;#235;&#34;, &#34;&#38;#239;&#34;, &#34;&#38;#246;&#34;, &#34;&#38;#252;&#34;, &#34;&#38;#255;&#34;)
+
+    For Each Item In textArray
+
+    Selection.Find.Execute Replace:=wdReplaceAll
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = Item
+        .Replacement.Text = encodeArray(n)
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = True
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        
+        .MatchAllWordForms = False
+    End With
+       
+       n = n + 1
+       
+    Next
+    
+&#39;Encode other characters
+    Dim textArray2 As Variant
+    Dim encodeArray2 As Variant
+    Dim i
+    i = 0
+    
+    &#39;array containing ascii text
+    textArray2 = Array(&#34;&#8216;&#34;, &#34;&#8217;&#34;, &#34;&#8218;&#34;, &#34;&#8220;&#34;, &#34;&#8221;&#34;, &#34;&#8222;&#34;, &#34;&#8249;&#34;, &#34;&#8250;&#34;, &#34;&#8482;&#34;, &#34;&#161;&#34;, &#34;&#162;&#34;, &#34;&#163;&#34;, &#34;&#164;&#34;, &#34;&#165;&#34;, &#34;&#167;&#34;, &#34;&#169;&#34;, &#34;&#170;&#34;, &#34;&#171;&#34;, &#34;&#172;&#34;, &#34;&#174;&#34;, &#34;&#176;&#34;, &#34;&#177;&#34;, &#34;&#181;&#34;, &#34;&#182;&#34;, &#34;&#186;&#34;, &#34;&#187;&#34;, &#34;&#188;&#34;, &#34;&#189;&#34;, &#34;&#190;&#34;, &#34;&#191;&#34;, &#34;&#223;&#34;, &#34;&#197;&#34;, &#34;&#229;&#34;, &#34;&#230;&#34;, &#34;&#198;&#34;, &#34;&#231;&#34;, &#34;&#199;&#34;, &#34;&#208;&#34;, &#34;&#240;&#34;, &#34;&#247;&#34;, &#34;&#216;&#34;, &#34;&#248;&#34;, &#34;&#254;&#34;, &#34;&#222;&#34;, &#34;&#338;&#34;, &#34;&#339;&#34;, &#34;&#352;&#34;, &#34;&#353;&#34;, &#34;&#381;&#34;, &#34;&#382;&#34;, &#34;&#402;&#34;, &#34;&#8211;&#34;, &#34;&#8212;&#34;, &#34;&#8224;&#34;, &#34;&#8225;&#34;, &#34;&#8226;&#34;, &#34;&#8240;&#34;, &#34;&#8249;&#34;, &#34;&#8250;&#34;, &#34;&#8364;&#34;)
+    &#39;array containing html entities
+    encodeArray2 = Array(&#34;&#38;#8216;&#34;, &#34;&#38;#8217;&#34;, &#34;&#38;#8218;&#34;, &#34;&#38;#8220;&#34;, &#34;&#38;#8221;&#34;, &#34;&#38;#8222;&#34;, &#34;&#38;#8249;&#34;, &#34;&#38;#8250;&#34;, &#34;&#38;#8482;&#34;, &#34;&#38;#161;&#34;, &#34;&#38;#162;&#34;, &#34;&#38;#163;&#34;, &#34;&#38;#164;&#34;, &#34;&#38;#165;&#34;, &#34;&#38;#167;&#34;, &#34;&#38;#169;&#34;, &#34;&#38;#170;&#34;, &#34;&#38;#171;&#34;, &#34;&#38;#172;&#34;, &#34;&#38;#174;&#34;, &#34;&#38;#176;&#34;, &#34;&#38;#177;&#34;, &#34;&#38;#181;&#34;, &#34;&#38;#182;&#34;, &#34;&#38;#186;&#34;, &#34;&#38;#187;&#34;, &#34;&#38;#188;&#34;, &#34;&#38;#189;&#34;, &#34;&#38;#190;&#34;, &#34;&#38;#191;&#34;, &#34;&#38;#223;&#34;, &#34;&#38;#197;&#34;, &#34;&#38;#229;&#34;, &#34;&#38;#230;&#34;, &#34;&#38;#198;&#34;, &#34;&#38;#231;&#34;, &#34;&#38;#199;&#34;, &#34;&#38;#208;&#34;, &#34;&#38;#240;&#34;, &#34;&#38;#247;&#34;, &#34;&#38;#216;&#34;, &#34;&#38;#248;&#34;, &#34;&#38;#254;&#34;, &#34;&#38;#222;&#34;, &#34;&#38;#338;&#34;, &#34;&#38;#339;&#34;, &#34;&#38;#352;&#34;, &#34;&#38;#353;&#34;, &#34;&#38;#381;&#34;, &#34;&#38;#382;&#34;, &#34;&#38;#402;&#34;, &#34;&#38;#8211;&#34;, &#34;&#38;#8212;&#34;, &#34;&#38;#8224;&#34;, &#34;&#38;#8225;&#34;, &#34;&#38;#8226;&#34;, &#34;&#38;#8240;&#34;, &#34;&#38;#8249;&#34;, &#34;&#38;#8250;&#34;, &#34;&#38;#8364;&#34;)
+
+    For Each Item In textArray2
+
+    Selection.Find.Execute Replace:=wdReplaceAll
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = Item
+        .Replacement.Text = encodeArray2(i)
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = True
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+       
+       i = i + 1
+       
+    Next
+    
+   
+End Sub
+</textarea>
+</div>
+<div id="footer">
+<h2 class="pacifico">Instructions</h2>
+<ol>
+<li>Open word</li>
+<li >Go to View &#10174; Macros <img id="1" src="images/eye.png"> </li>
+<li >Under 'Macro Name' type 'Convert_to_HTML_Character_Entities'. <img id="2" src="images/eye.png"></li>
+<li>Click 'Create'</li>
+<li >Delete the new text which is created, e.g: Sub test() ' ' test Macro ' ' End Sub <img id="3" src="images/eye.png"></li>
+<li>Paste the macro code (above) in place of it.</li>
+<li >Save the macro and close the window. <img id="4" src="images/eye.png"></li>
+</ol>
+
+<h3 class="pacifico"> Using the Macro  <img id="5" src="images/eye.png" ></h3>
+<ol >
+<li >Go to View &#10174; Marcos</li>
+<li>Select 'Convert_to_HTML_Character_Entities'. </li>
+<li>Click 'Run'.</li>
+</ol>
+<p>Please note: If you wish to undo the macro you will have to undo many times as word considers each character change as a separate action.</p>
+
+<h3 class="pacifico">Before:</h3>
+<img src="images/before.jpg">
+<h3 class="pacifico">After:</h3>
+<img src="images/after.jpg">
+<p>By <strong>Jenny Robertson </strong>(jennifer.robertson@addison-group.net)</p>
+
+<!--
+"&#38;","&#169;","&#174;","&#178;","&#179;","&#8211;","&#8212;","&#8216;","&#8217;","&#8220;","&#8221;","&#8226;","&#8224;","&#8225;","&#8242;","&#8243;","&#8249;","&#8250;","&#8364;","&#8482;","&#732;","&#710;","&#9824;","&#9827;","&#9829;","&#9830;","&#9674;","&#8592;","&#8594;","&#8593;","&#8595;","&#8596;","&#172;","&#161;","&#162;","&#163;","&#164;","&#165;","&#166;","&#167;","&#168;","&#170;","&#171;","&#172;","&#173;","&#175;","&#176;","&#177;","&#180;","&#181;","&#182;","&#183;","&#184;","&#185;","&#186;","&#187;","&#188;","&#189;","&#190;","&#191;","&#192;","&#193;","&#194;","&#195;","&#196;","&#197;","&#198;","&#199;","&#200;","&#201;","&#202;","&#203;","&#204;","&#205;","&#206;","&#207;","&#208;","&#209;","&#210;","&#211;","&#212;","&#213;","&#214;","&#215;","&#216;","&#217;","&#218;","&#219;","&#220;","&#221;","&#222;","&#223;","&#224;","&#225;","&#226;","&#227;","&#228;","&#229;","&#230;","&#231;","&#232;","&#233;","&#234;","&#235;","&#236;","&#237;","&#238;","&#239;","&#240;","&#241;","&#242;","&#243;","&#244;","&#245;","&#246;","&#247;","&#248;","&#249;","&#250;","&#251;","&#252;","&#253;","&#254;","&#255;"
+
+<p>http://stackoverflow.com/questions/13393247/jquery-image-hover-float-next-to-cursor-when-hover-over-any-a-link</p>
+-->
+
+
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	
+	function hover_img(textid,image)
+	{
+		$("#" + textid).mousemove(function(e) {
+			$img = $("#" + image)
+			$img.stop(1, 1).show();
+			$img.offset({
+				top: e.pageY + 20,
+				left: e.pageX + 10
+			});
+		}).mouseleave(function() {
+			$img = $("#" + image)
+			$img.hide();
+		});
+	}
+	
+hover_img('1','img1');
+hover_img('2','img2');
+hover_img('3','img3');
+hover_img('4','img4');
+hover_img('5','img5');
+	
+	$('button').click(function() {
+    $('textarea').select(); 
+});
+	
+	
+	
+	
+	
+});<!--doc-->
+
+
+</script>
+
+</body>
+</html>
+

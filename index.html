@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>HTML Character Encoder</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="icon" 
+	type="image/png" 
+	href="images/favicon.ico">
+</head>
+<body>
+	<div id="container">
+		<nav>
+			<a class="current" href="index.html">Online Encoder</a>
+			<a href="macro.html">Word Macro Encoder </a>
+			<a href="table.html">Word table to HTML</a>
+		</nav>
+
+		<h1 class="pacifico"><span class="anagramregular">HTML</span> Character Encoder</h1>
+		
+		<!-- <input type="radio" name="check" value="nothing" id="nothing" checked>Just encode<br>
+		<input type="radio" name="check" value="checkbox_space"  id="checkbox_space">Remove extra line breaks?<br> -->
+		<input type="checkbox" id="checkbox_p">Add <span class="courier">&#60;p&#62;</span> tags?<br>
+		<input type="checkbox" id="checkbox_list">Add list tags?<br>
+		<input type="checkbox" id="checkbox_removebreaks">Remove all line breaks?<br>
+		
+		<br>
+		<input type="checkbox" name="apo" value="apo" id="apo">Encode apostrophes? ( " and ')<br>
+		<input type="checkbox" name="tags" value="tags" id="tags" checked>Encode less than and more than signs? (&#60; and &#62;)<br>
+
+		<h2 class="pacifico"> Original text </h2>
+		<textarea id="original_text" type="text" spellcheck="false"></textarea><br/>
+		<button id="clear" type="button">Clear</button>
+		<button type="button" class="anagramregular large_button" id="encode">Encode!</button>
+		
+		
+		
+		<h2 class="pacifico"> Encoded text </h2> 
+		<textarea id="encoded_text" type="text" spellcheck="false"></textarea><br/>
+		<button id="select" type="button">Select for copying</button> 
+
+		
+	</div>
+	<div id="footer">
+		<h2 class="pacifico">Instructions</h2>
+		<p>This tool converts Ascii Text into HTML Character Numbers. Paste your text into the Original text box and click encode. The newly encoded text will appear in the bottom box. </p>
+		<p>For example,<span class="purple"><strong>&quot;</strong></span><strong>centro de <span class="purple">&aacute;</span>rea<span class="purple">&quot;</span></strong> will become <strong><span class="purple">&#38;#34;</span>centro de <span class="purple">&#38;#225;</span>rea<span class="purple">&#38;#34;</span></strong></p>
+		<p>You can also add &lt;p&gt; and list tags to prepare the text for use in your html code. 
+			
+			Try it out:  <button id="select2" type="button">Test text</button> </p>
+			<p>By <strong>Jenny Robertson </strong>(jennifer.robertson@addison-group.net)</p>
+			
+			
+			<textarea id="hidden_text" type="text" spellcheck="false">
+Es un área definida de la 'superficie', ya sea de tierra, agua o hielo propuesto para la llegada, salida y movimiento en superficie de aeronaves de distintos tipos con llegadas y salidas nacionales e internacionales.
+
+Bullet point list:
+•	Item one
+•	Item two
+•	Item three 
+Ordered list:
+1.	Item one
+2.	Item two
+3.	Item three
+Letter list:
+a.	Item one
+b.	Item two
+c.	Item three
+Capital letter list:
+A.	Item one
+B.	Item two
+C.	Item three
+
+
+
+Habitualmente este término se aplica a todas las pistas donde aterrizan aviones, sin embargo el término correcto es aeródromo.
+Los grandes aeropuertos cuentan con pistas de aterrizaje pavimentadas de uno o varios kilómetros de extensión, calles de rodaje, terminales de pasajeros y carga, grandes superficies de estacionamientos, etc.
+En los aeropuertos los aviones suelen recibir combustible, mantenimiento y reparaciones.
+Un área importante de los aeropuertos es el "centro de control de área", en el cual se desempeñan los controladores del tráfico aéreo; personas encargadas de dirigir y controlar el movimiento de aeronaves en el aeropuerto y en la zona bajo su jurisdicción.
+
+
+
+
+Se considera también al aeropuerto como la área destinada a dar cabida a las aeronaves mientras se produce el embarque y desembarque de pasajeros y/o productos.
+En los aeropuertos hay áreas destinadas al embarque y desembarque, servicios comerciales y aparcamiento de automóviles. Gran parte de los aeropuertos del mundo utilizan maquinas de rayos X para detectar posibles materiales peligrosos que se intenten internar en el país.
+Además de todo lo anteriormente dicho, también encontramos dentro de estos recintos la aduana, lugar donde los pasajeros que salen o entran del país son controlados.
+Los aeropuertos más importantes ofrecen al pasajero una gran variedad de servicios, como salones VIP, centros comerciales, juegos, restaurantes, etc.
+El mayor aeropuerto del mundo es el Aeropuerto Rey Khalid, en Arabia Saudita con un área total de 225 kilómetros cuadrados.
+</textarea>
+		</div>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script>
+		$(document).ready(function(){
+			
+			$("#clear").click(function(){
+				$("#original_text").val("");
+				$("#encoded_text").val("");
+				
+			});
+			
+			$('#select').click(function(){
+				$('#encoded_text').select(); 
+				
+			});
+			$('#select2').click(function(){
+				
+				$('#original_text').val($("#hidden_text").val())
+				
+			});
+			
+			
+			$("#encode").click(function(){
+				
+			
+
+
+				
+		//get the value from the textarea
+		var original_string = $('textarea#original_text').val();
+		
+		//change chars into hex codes		
+		
+		
+		var i = original_string.length;
+		var tempArray = [];
+		while (i--) {
+			var number = original_string[i].charCodeAt();
+			if (number == 38 || (number ==96) || number > 127) {
+				tempArray[i] = '&#'+number+';';
+			} else {
+				tempArray[i] = original_string[i];
+			}
+		}
+		//sets original string to the new encoded values
+		original_string = tempArray.join('');
+		
+		//
+		var old_char=['"',"'",]
+				
+		var new_char = ["&#34;", "&#39;"]
+
+		var old_char2=["<", ">"]
+				
+		var new_char2 = ["&#60;", "&#62;"]
+
+		if ($('#apo').is(':checked')){
+			
+			for ( var i = 0, l = old_char.length; i < l; i++ ) {
+
+				
+				original_string = original_string.replace(new RegExp( old_char[i],"g"	), new_char[i]);
+				
+			}
+
+		}
+		if ($('#tags').is(':checked')){
+			
+			for ( var i = 0, l = old_char2.length; i < l; i++ ) {
+
+				
+				original_string = original_string.replace(new RegExp( old_char2[i],"g"	), new_char2[i]);
+				
+			}
+
+		}
+
+		if ($('#checkbox_removebreaks').is(':checked')){			
+						
+			original_string = original_string.replace(/\n/g, " ");
+		}
+			
+		
+		
+		function tags(){
+
+			original_string = "<p>" + original_string 
+			
+			//replace multiple line breaks with just one		
+			original_string = original_string.replace(/\n+/g, "\n");	
+			original_string = original_string.replace(/\r+/g, "\n");	
+			//original_string = original_string.replace(/ \n+/g, "");
+			// = original_string.replace(/ \r+/g, "");
+			
+			original_string = original_string.replace(/\n/g, "</p>\r\n\r\n<p>");
+			original_string = original_string + "</p>"
+			
+			original_string = original_string.replace(new RegExp( "<p></p>","g"	), "");	
+			original_string = original_string.replace(new RegExp( "<p> </p>","g"	), "");
+			original_string = original_string.slice(original_string.indexOf("<"), original_string.length);	
+			original_string = original_string.slice(0, (original_string.lastIndexOf(">") + 1));	
+		}
+
+		if ($('#checkbox_p').is(':checked')){
+			//add p tags
+			tags();		
+
+		}
+
+
+		if ($('#checkbox_list').is(':checked')){
+
+			original_string = original_string.replace(/^(<p>)?&#8226;\s+((.| )*)/gm, "<li>$2</li>")//replace bullet points with li
+			original_string = original_string.replace(/^(<p>)?\d+\.\s+((.| )*)(<\/p>)?/gm, "<lo>$2</lo>")//replace numbered items with li
+			original_string = original_string.replace(/^(<p>)?[A-Z]\.\s+((.| )*)/gm, "<lcapital>$2</lcapital>")//replace capitals items with li
+			original_string = original_string.replace(/^(<p>)?[a-z]\.\s+((.| )*)/gm, "<llower>$2</llower>")//replace letter items with li
+
+			original_string = original_string.replace(/((<li>[\S\s]*?<\/li>\s*){1,})/g, "<ul>\n$1</ul>\n")//add ul around bullets
+			original_string = original_string.replace(/((<lo>[\S\s]*?<\/lo>\s*){1,})/g, "<ol>\n$1</ol>\n")//add ol around numbers
+			original_string = original_string.replace(/((<lcapital>[\S\s]*?<\/lcapital>\s*){1,})/g, '<ol type="A">\n$1</ol>\n')//add ol around capital
+			original_string = original_string.replace(/((<llower>[\S\s]*?<\/llower>\s*){1,})/g, '<ol type="a">\n$1</ol>\n')//add ol around lower case letters
+
+
+			original_string = original_string.replace(/<(\/?)(lo|lcapital|llower)>/g, "<$1li>")//turn lo into li (used to differentiate between numbers and letters)
+			
+			original_string = original_string.replace(/<\/p><\/li>/g, "<\/li>")//remove extra p tags
+			original_string = original_string.replace(/<\/li>\s*<(li|\/ul|\/ol)>/g, "</li>\n<$1>")//remove extra line breaks between li tags
+			original_string = original_string.replace(/<\/(ul|ol)>\s(.)/g, "<\/$1>\n\n$2")//add line break at the end of the list
+
+		}
+
+		//remove extra line breaks
+		original_string = original_string.replace(/\n{2,}/g, "\n\n")
+		
+		//send string to new textarea
+		$(encoded_text).val(original_string)
+
+	}); 
+
+
+});
+
+</script>
+
+</body>
+</html>
